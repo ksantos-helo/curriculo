@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currículo Premium - Kelly Costa</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #1E3A8A;
+      --secondary: #3B82F6;
+      --accent: #60A5FA;
+      --bg-light: #F8FAFC;
+      --text-dark: #0F172A;
+      --text-muted: #334155;
+      --border-color: #CBD5E1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #525659;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .download-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      background: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      position: relative;
+    }
+
+    .sidebar {
+      background-color: var(--bg-light);
+      border-right: 1px solid var(--border-color);
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .profile-photo-container {
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      border: 3px solid var(--secondary);
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+      background: #CBD5E1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-upload-input { display: none; }
+
+    .photo-label {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.75);
+      color: white;
+      font-size: 8px;
+      text-align: center;
+      padding: 3px 0;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-title {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--primary);
+      font-weight: 800;
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .soft-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5px;
+    }
+
+    .soft-card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      padding: 5px 3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .soft-card i {
+      color: var(--secondary);
+      font-size: 9px;
+    }
+
+    .differentials-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .diff-item {
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .diff-item i { color: #10B981; }
+
+    .skills-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .skill-bar-item { font-size: 8.5px; }
+
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .progress-bg {
+      height: 4.5px;
+      background: #E2E8F0;
+      border-radius: 6px;
+      overflow: hidden;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      border-radius: 6px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+
+    .tool-card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      padding: 4px 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .tool-card img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+    }
+
+    .tool-card span {
+      font-size: 6.5px;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+
+    .contact-item a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .main-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .header-main h1 {
+      font-size: 22px;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .header-main h2 {
+      font-size: 10.5px;
+      color: var(--secondary);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .summary-card {
+      background: var(--bg-light);
+      border-left: 3.5px solid var(--primary);
+      padding: 8px 10px;
+      border-radius: 0 6px 6px 0;
+      font-size: 9.2px;
+      line-height: 1.35;
+      color: var(--text-muted);
+      text-align: justify;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .main-section-title {
+      font-size: 10.5px;
+      color: var(--primary);
+      font-weight: 800;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 2px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .timeline-item {
+      padding-left: 8px;
+      border-left: 2px solid var(--secondary);
+    }
+
+    .job-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .company-period {
+      font-size: 9px;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .job-details {
+      font-size: 8.8px;
+      color: var(--text-muted);
+      line-height: 1.32;
+    }
+
+    .job-details ul { padding-left: 10px; }
+
+    .stack-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stack-column h4 {
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+
+    .tech-badge-blue {
+      background-color: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1E3A8A;
+      font-size: 7.5px;
+      font-weight: 700;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+
+    .tech-badge-green {
+      background-color: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      color: #166534;
+      font-size: 7.5px;
+      font-weight: 700;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+
+    .institution-card {
+      background-color: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      border-radius: 5px;
+      padding: 6px 10px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .institution-logo {
+      width: 60px;
+      height: auto;
+    }
+
+    .institution-info {
+      font-size: 10px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .cert-category { margin-bottom: 6px; }
+
+    .cert-category-title {
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .cert-category-scope {
+      font-size: 8px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .cert-list {
+      padding-left: 12px;
+      font-size: 8.5px;
+      color: var(--text-dark);
+    }
+
+    .qr-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-light);
+      padding: 5px 8px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+    }
+
+    #qrcode img {
+      width: 42px !important;
+      height: 42px !important;
+    }
+
+    .qr-text p {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .qr-text a {
+      font-size: 8.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid var(--border-color);
+      padding-top: 5px;
+      margin-top: auto;
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    @media print {
+      @page { size: A4 portrait; margin: 0; }
+      body { background: white; padding: 0; }
+      .download-btn, .photo-label { display: none !important; }
+      .a4-page { box-shadow: none; width: 210mm; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="download-btn" onclick="window.print()">
+    <i class="fa-solid fa-print"></i> Imprimir / Salvar como PDF Clicável
+  </button>
+
+  <div class="a4-page" id="cv-content">
+    
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      
+      <div class="profile-photo-container">
+        <img id="profile-img" src="https://ui-avatars.com/api/?name=Kelly+Costa&background=1E3A8A&color=fff&size=150" alt="Kelly Costa">
+        <label for="photo-upload" class="photo-label">Carregar Foto</label>
+        <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*" onchange="previewPhoto(event)">
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title"><i class="fa-solid fa-brain"></i> Soft Skills</div>
+        <div class="soft-skills-grid">
+          <div class="soft-card"><i class="fa-solid fa-crown"></i> Liderança</div>
+          <div class="soft-card"><i class="fa-solid fa-comments"></i> Comunicação</div>
+          <div class="soft-card"><i class="fa-solid fa-users"></i> Trab. Equipe</div>
+          <div class="soft-card"><i class="fa-solid fa-puzzle-piece"></i> Res. Probl.</div>
+          <div class="soft-card"><i class="fa-solid fa-calendar-check"></i> Organização</div>
+          <div class="soft-card"><i class="fa-solid fa-rotate"></i> Adaptabilidade</div>
+          <div class="soft-card"><i class="fa-solid fa-lightbulb"></i> Criatividade</div>
+          <div class="soft-card"><i class="fa-solid fa-chart-pie"></i> Pens. Analítico</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title"><i class="fa-solid fa-circle-check"></i> Diferenciais</div>
+        <div class="differentials-list">
+          <div class="diff-item"><i class="fa-solid fa-check"></i> Disponibilidade Imediata</div>
+          <div class="diff-item"><i class="fa-solid fa-check"></i> Trabalho Remoto / Híbrido</div>
+          <div class="diff-item"><i class="fa-solid fa-check"></i> Inglês Técnico / Intermediário</div>
+          <div class="diff-item"><i class="fa-solid fa-check"></i> Disponibilidade para Viagens</div>
+          <div class="diff-item"><i class="fa-solid fa-check"></i> Aprendizado Contínuo & IA</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title"><i class="fa-solid fa-chart-line"></i> Nível Técnico</div>
+        <div class="skills-bars">
+          <div class="skill-bar-item">
+            <div class="skill-info"><span>SQL & BigQuery (GCP)</span><span>95%</span></div>
+            <div class="progress-bg"><div class="progress-fill" style="width: 95%;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-info"><span>Governança & Data Products</span><span>92%</span></div>
+            <div class="progress-bg"><div class="progress-fill" style="width: 92%;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-info"><span>Python & Eng. Analítica</span><span>88%</span></div>
+            <div class="progress-bg"><div class="progress-fill" style="width: 88%;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-info"><span>Tableau, Looker & Power BI</span><span>90%</span></div>
+            <div class="progress-bg"><div class="progress-fill" style="width: 90%;"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-info"><span>Git Flow & Agilidade (Scrum)</span><span>85%</span></div>
+            <div class="progress-bg"><div class="progress-fill" style="width: 85%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title"><i class="fa-solid fa-microchip"></i> Ferramentas & Stack</div>
+        <div class="tools-grid">
+          <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"><span>GCP</span></div>
+          <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"><span>Python</span></div>
+          <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"><span>SQL</span></div>
+          <div class="tool-card"><img src="https://www.vectorlogo.zone/logos/tableau/tableau-icon.svg"><span>Tableau</span></div>
+          <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"><span>Git</span></div>
+          <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"><span>Docker</span></div>
+          <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"><span>Pandas</span></div>
+          <div class="tool-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg"><span>Jira</span></div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title"><i class="fa-solid fa-address-card"></i> Contato</div>
+        <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Barueri, SP, Brasil</div>
+        <div class="contact-item"><i class="fa-solid fa-phone"></i> <a href="tel:11962299776">(11) 96229-9776</a></div>
+        <div class="contact-item"><i class="fa-solid fa-envelope"></i> <a href="mailto:kelly.cfcosta.sp@gmail.com">kelly.cfcosta.sp@gmail.com</a></div>
+        <div class="contact-item"><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/kellycristina-costa" target="_blank">LinkedIn</a></div>
+        <div class="contact-item"><i class="fa-solid fa-globe"></i> <a href="https://portfolio-kelly-costa.vercel.app/" target="_blank">Portfólio Vercel</a></div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title"><i class="fa-solid fa-language"></i> Idiomas</div>
+        <div class="contact-item"><strong>Português:</strong> Nativo</div>
+        <div class="contact-item"><strong>Inglês:</strong> Técnico / Intermediário</div>
+      </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      
+      <div class="header-main">
+        <h1>KELLY COSTA</h1>
+        <h2>Estratégia & Governança de Dados | Data Product Owner | Analytics</h2>
+      </div>
+
+      <div class="summary-card">
+        Especialista em Dados & Data Product Owner com 16 anos de experiência em Tecnologia, sendo mais de 7 anos dedicados exclusivamente a Dados & Analytics. Lidero a estratégia, governança e ciclo de vida de um portfólio de mais de 9 Data Products distribuídos em 5 domínios corporativos. Conduzo iniciativas de Engenharia Analítica, Modelagem Semântica no BigQuery (GCP), automação em Python para +462M de registros, Governança, LGPD, FinOps e Métodos Ágeis.
+      </div>
+
+      <div>
+        <div class="main-section-title"><i class="fa-solid fa-briefcase"></i> Experiência Profissional & Principais Entregas</div>
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="job-title">Especialista BI Analytics I - Estratégia e Finanças</div>
+            <div class="company-period">Grupo Boticário | Maio de 2024 - Presente</div>
+            <div class="job-details">
+              <ul>
+                <li><strong>Data Domain, Governança & Modelagem Semântica:</strong> Camada semântica corporativa no BigQuery/GCP, regras SQL, Fato/Dimensão, metadados e SLAs de qualidade de dados, consolidando Single Source of Truth e conformidade LGPD.</li>
+                <li><strong>Engenharia Analítica, Cloud & FinOps:</strong> Otimização de pipelines no BigQuery, reduzindo cargas críticas de 15 dias para 1 dia (93% de ganho de performance e otimização de custos nuvem).</li>
+                <li><strong>Python & Engenharia de Dados:</strong> Esteira automatizada em Python no GCP processando mais de 462M de registros contábeis.</li>
+                <li><strong>IA Generativa & Gestão do Conhecimento:</strong> Central do Conhecimento com Gemini e NotebookLM para o catálogo de metadados, capacitando 51 colaboradores.</li>
+                <li><strong>Cultura Técnica & Git Flow:</strong> Versionamento colaborativo com Git/GitHub com times de Engenharia, Backend e Machine Learning.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="job-title">Analista de Dados III - CRM</div>
+            <div class="company-period">Grupo Boticário | Jan de 2022 - Maio de 2024</div>
+            <div class="job-details">
+              <ul>
+                <li>Transformação de dados em BigQuery e Alteryx para Venda Direta e CRM; dashboards no Tableau e Looker Studio.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="job-title">Analista de Dados (Clientes Santander e Drogarias SP)</div>
+            <div class="company-period">Marketdata | Out de 2019 - Jan de 2022</div>
+            <div class="job-details">
+              <ul>
+                <li>Dashboards em Power BI e consultas em Oracle PL/SQL, BigQuery e SAS. Automação CRM via IBM Watson.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="job-title">Analista de Teste / QA & Suporte TI</div>
+            <div class="company-period">Tok&Stok | Mar de 2010 - Out de 2019</div>
+            <div class="job-details">
+              <ul>
+                <li>Homologações, testes funcionais, relatórios SSRS (SQL Server) e sustentação sob práticas ITIL.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <div class="main-section-title"><i class="fa-solid fa-layer-group"></i> Stack Tecnológico & Governança</div>
+        <div class="stack-section">
+          
+          <div class="stack-column">
+            <h4>Ferramentas & Arquitetura Cloud:</h4>
+            <div class="tag-container">
+              <span class="tech-badge-blue">SQL Avançado</span>
+              <span class="tech-badge-blue">Google BigQuery</span>
+              <span class="tech-badge-blue">Google Cloud (GCP)</span>
+              <span class="tech-badge-blue">BigQuery Pipelines</span>
+              <span class="tech-badge-blue">Git / GitHub (Git Flow)</span>
+              <span class="tech-badge-blue">SAP (ECC & S/4HANA)</span>
+              <span class="tech-badge-blue">Tableau</span>
+              <span class="tech-badge-blue">Looker Studio</span>
+              <span class="tech-badge-blue">Power BI</span>
+              <span class="tech-badge-blue">Alteryx</span>
+              <span class="tech-badge-blue">Oracle PL/SQL</span>
+              <span class="tech-badge-blue">JIRA</span>
+            </div>
+          </div>
+
+          <div class="stack-column">
+            <h4>Metodologias & Governança:</h4>
+            <div class="tag-container">
+              <span class="tech-badge-green">IA Generativa (Gemini/LLMs)</span>
+              <span class="tech-badge-green">Governança & Metadados</span>
+              <span class="tech-badge-green">Modelagem Semântica</span>
+              <span class="tech-badge-green">FinOps (Custo Cloud)</span>
+              <span class="tech-badge-green">Data Stewardship</span>
+              <span class="tech-badge-green">Analytics Engineering</span>
+              <span class="tech-badge-green">Frameworks Ágeis (Scrum)</span>
+              <span class="tech-badge-green">Governança de TI (ITIL)</span>
+              <span class="tech-badge-green">Analytics Financeiro</span>
+              <span class="tech-badge-green">Compliance & LGPD</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <div class="main-section-title"><i class="fa-solid fa-graduation-cap"></i> Formação & Certificações</div>
+        <div class="job-title">Bacharelado em Administração de Empresas</div>
+        <div class="company-period">Faculdade Fernão Dias (2008 – 2011)</div>
+
+        <div class="institution-card">
+          <img src="https://www.alura.com.br/assets/img/alura-logo.1729003504.svg" class="institution-logo" alt="Logo Alura">
+          <div class="institution-info">Alura - Escola de Tecnologia</div>
+        </div>
+        
+        <div style="margin-top: 6px;">
+          <div class="cert-category">
+            <div class="cert-category-title">1. Linguagens, Transformação e Engenharia Analítica</div>
+            <div class="cert-category-scope">(Cobre: SQL/Python para manipulação, transformação, modelagem de dados e análise)</div>
+            <ul class="cert-list">
+              <li>Pandas: transformação e manipulação de dados — 05/03/2026</li>
+              <li>Pandas: selecionando e agrupando dados — 05/03/2026</li>
+              <li>Pandas I/O: trabalhando com diferentes formatos de arquivos — 05/03/2026</li>
+              <li>Pandas: conhecendo a biblioteca — 27/02/2026</li>
+              <li>NumPy: análise numérica eficiente com Python — 05/03/2026</li>
+              <li>Python para Dados: trabalhando com funções, estruturas e exceções — 15/02/2026</li>
+              <li>Praticando Python para Data Science: Challenge Alura Store — 03/03/2026</li>
+              <li>Python para Dados: primeiros passos — 19/10/2025</li>
+            </ul>
+          </div>
+
+          <div class="cert-category">
+            <div class="cert-category-title">2. Ecossistema Cloud, Infraestrutura e DevOps</div>
+            <div class="cert-category-scope">(Cobre: Soluções em nuvem, orquestração, tráfego seguro, Linux CLI e Git/versionamento)</div>
+            <ul class="cert-list">
+              <li>Entrega Certificação OCI Foundations Associate — 13/05/2026</li>
+              <li>Certificação Oracle Cloud Infrastructure: explorando o ambiente e funcionalidades — 13/05/2026</li>
+              <li>DevOps: trabalhando com tráfego seguro em comunicações web — 05/04/2026</li>
+              <li>DevOps: explorando conceitos, comandos e scripts no Linux CLI — 02/04/2026</li>
+              <li>Git e GitHub: compartilhando e colaborando em projetos — 07/08/2025</li>
+            </ul>
+          </div>
+
+          <div class="cert-category">
+            <div class="cert-category-title">3. Inteligência Artificial e Produtividade</div>
+            <div class="cert-category-scope">(Cobre: Adoção de IA generativa, automação de documentação e IA aplicada a dados)</div>
+            <ul class="cert-list">
+              <li>IA aplicada a Data Science: utilizando IA na construção de visualização de dados — 06/03/2026</li>
+              <li>IA aumentada: prevendo atrasos de voos — 07/03/2026</li>
+              <li>Engenharia de Prompt: criando prompts eficazes para IA Generativa — 26/08/2025</li>
+              <li>IA: explorando o potencial da inteligência artificial generativa — 21/08/2025</li>
+              <li>Aprendizagem: personalizando sua rotina de estudos com ChatGPT — 19/09/2025</li>
+            </ul>
+          </div>
+
+          <div class="cert-category">
+            <div class="cert-category-title">4. Estatística, Análise de Dados e Visão de Negócio</div>
+            <div class="cert-category-scope">(Cobre: Tradução de negócios, sustentação de análises, qualidade de dados e estatística)</div>
+            <ul class="cert-list">
+              <li>Estatística com Python: probabilidade e amostragem — 06/03/2026</li>
+              <li>Estatística com Python: resumindo e analisando dados — 06/03/2026</li>
+              <li>Data Science: testando relações com Regressão Linear — 06/03/2026</li>
+              <li>Regressão Linear: técnicas avançadas de modelagem — 07/03/2026</li>
+              <li>Machine Learning: classificação com SKLearn — 07/03/2026</li>
+              <li>Classificação: aprendendo a classificar dados com Machine Learning — 07/03/2026</li>
+              <li>Data Visualization: estilização de tabelas com Python — 05/03/2026</li>
+              <li>Data Visualization: criando gráficos com bibliotecas Python — 05/03/2026</li>
+              <li>Challenge Telecom X: análise de evasão de clientes — 06/03/2026</li>
+              <li>Challenge Telecom X: análise de evasão de clientes - Parte 2 — 08/03/2026</li>
+            </ul>
+          </div>
+
+          <div class="cert-category">
+            <div class="cert-category-title">5. Metodologias Ágeis e Gestão Profissional</div>
+            <div class="cert-category-scope">(Cobre: Scrum/Kanban, mentoria, alinhamento estratégico de negócios e resolução de problemas)</div>
+            <ul class="cert-list">
+              <li>Gestão Ágil: explorando conceitos da agilidade — 06/03/2026</li>
+              <li>Empreendedorismo: da ideia ao plano de negócios — 06/03/2026</li>
+              <li>Propósito profissional: seja protagonista da sua carreira — 04/03/2026</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="qr-container">
+        <div id="qrcode"></div>
+        <div class="qr-text">
+          <p>Acesse meu Portfólio Digital Completo</p>
+          <a href="https://portfolio-kelly-costa.vercel.app/" target="_blank">https://portfolio-kelly-costa.vercel.app/</a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/kellycristina-costa" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="https://portfolio-kelly-costa.vercel.app/" target="_blank"><i class="fa-solid fa-globe"></i> Portfólio</a>
+        <a href="mailto:kelly.cfcosta.sp@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="tel:11962299776"><i class="fa-solid fa-phone"></i> Telefone</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    new QRCode(document.getElementById("qrcode"), {
+      text: "https://portfolio-kelly-costa.vercel.app/",
+      width: 42,
+      height: 42,
+      colorDark : "#1E3A8A",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    function previewPhoto(event) {
+      const reader = new FileReader();
+      reader.onload = function(){
+        document.getElementById('profile-img').src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
+</body>
+</html>
