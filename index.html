@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Currículo Premium - Kelly Costa</title>
-  profile-photo-container
+  
+  <!-- Fontes Google Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- Ícones FontAwesome & Gerador de QR Code -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
@@ -21,6 +23,7 @@
       --text-dark: #0F172A;
       --text-muted: #334155;
       --border-color: #CBD5E1;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     }
 
     * {
@@ -35,9 +38,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      gap: 30px;
+      padding: 30px;
     }
 
+    /* Botão Flutuante Imprimir/Salvar */
     .download-btn {
       position: fixed;
       top: 20px;
@@ -45,51 +50,64 @@
       background: var(--secondary);
       color: white;
       border: none;
-      padding: 12px 24px;
+      padding: 14px 28px;
       border-radius: 50px;
       font-weight: 700;
       font-size: 14px;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 25px -3px rgba(59, 130, 246, 0.5);
       z-index: 1000;
       display: flex;
       align-items: center;
       gap: 10px;
+      transition: all 0.3s ease;
     }
 
+    .download-btn:hover {
+      background: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* Dimensões A4 Padrão Internacional (210mm x 297mm) */
     .a4-page {
       width: 210mm;
-      min-height: 297mm;
+      height: 296.8mm; /* Ajuste milimétrico para quebra de página exata */
       background: white;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       display: grid;
-      grid-template-columns: 260px 1fr;
+      grid-template-columns: 270px 1fr;
       position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      page-break-inside: avoid;
     }
 
+    /* Sidebar Esquerda */
     .sidebar {
       background-color: var(--bg-light);
       border-right: 1px solid var(--border-color);
-      padding: 20px 14px;
+      padding: 28px 18px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 20px;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
 
+    /* Foto de Perfil com Upload Local */
     .profile-photo-container {
-      width: 105px;
-      height: 105px;
+      width: 115px;
+      height: 115px;
       border-radius: 50%;
-      border: 3px solid var(--secondary);
+      border: 3.5px solid var(--secondary);
       margin: 0 auto;
       overflow: hidden;
       position: relative;
-      background: #CBD5E1;
+      background: #E2E8F0;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: var(--shadow);
     }
 
     .profile-photo-container img {
@@ -104,11 +122,11 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 0.8);
       color: white;
-      font-size: 8px;
+      font-size: 8.5px;
       text-align: center;
-      padding: 3px 0;
+      padding: 4px 0;
       cursor: pointer;
       font-weight: 600;
     }
@@ -116,81 +134,87 @@
     .sidebar-section {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .sidebar-title {
-      font-size: 10.5px;
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
       color: var(--primary);
       font-weight: 800;
       border-bottom: 2px solid var(--secondary);
-      padding-bottom: 2px;
+      padding-bottom: 4px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
+    /* Soft Skills Cards Grid */
     .soft-skills-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 5px;
+      gap: 6px;
     }
 
     .soft-card {
       background: white;
       border: 1px solid var(--border-color);
-      border-radius: 5px;
-      padding: 5px 3px;
+      border-radius: 6px;
+      padding: 6px 4px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       font-size: 8.5px;
       font-weight: 700;
       color: var(--text-dark);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     .soft-card i {
       color: var(--secondary);
-      font-size: 9px;
+      font-size: 10px;
     }
 
+    /* Diferenciais */
     .differentials-list {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
     .diff-item {
-      font-size: 9px;
+      font-size: 9.5px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       color: var(--text-dark);
       font-weight: 600;
     }
 
     .diff-item i { color: #10B981; }
 
+    /* Nível Técnico - Barras */
     .skills-bars {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 7px;
     }
 
-    .skill-bar-item { font-size: 8.5px; }
+    .skill-bar-item { font-size: 9px; }
 
     .skill-info {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
       font-weight: 600;
       color: var(--text-dark);
     }
 
     .progress-bg {
-      height: 4.5px;
+      height: 5px;
       background: #E2E8F0;
       border-radius: 6px;
       overflow: hidden;
@@ -206,42 +230,47 @@
       print-color-adjust: exact;
     }
 
+    /* Ferramentas & Stack Grid */
     .tools-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
+      gap: 6px;
     }
 
     .tool-card {
       background: white;
       border: 1px solid var(--border-color);
-      border-radius: 5px;
-      padding: 4px 2px;
+      border-radius: 6px;
+      padding: 5px 2px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2px;
+      gap: 3px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     .tool-card img {
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       object-fit: contain;
     }
 
     .tool-card span {
-      font-size: 6.5px;
+      font-size: 7px;
       font-weight: 700;
       color: var(--primary);
       text-align: center;
     }
 
+    /* Contato Clicável */
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 9px;
+      gap: 8px;
+      font-size: 9.5px;
       color: var(--text-muted);
       word-break: break-all;
     }
@@ -252,179 +281,223 @@
       font-weight: 600;
     }
 
+    .contact-item a:hover {
+      text-decoration: underline;
+      color: var(--secondary);
+    }
+
+    .contact-item i {
+      color: var(--secondary);
+      width: 14px;
+    }
+
+    /* Coluna Direita (Conteúdo Principal) */
     .main-content {
-      padding: 20px;
+      padding: 28px 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
     }
 
     .header-main h1 {
-      font-size: 22px;
+      font-size: 24px;
       color: var(--primary);
       font-weight: 800;
+      letter-spacing: 0.5px;
     }
 
     .header-main h2 {
-      font-size: 10.5px;
+      font-size: 11px;
       color: var(--secondary);
       font-weight: 700;
+      margin-top: 2px;
       text-transform: uppercase;
+      letter-spacing: 0.4px;
     }
 
+    /* Resumo Profissional */
     .summary-card {
       background: var(--bg-light);
-      border-left: 3.5px solid var(--primary);
-      padding: 8px 10px;
+      border-left: 4px solid var(--primary);
+      padding: 10px 12px;
       border-radius: 0 6px 6px 0;
-      font-size: 9.2px;
-      line-height: 1.35;
+      font-size: 9.5px;
+      line-height: 1.45;
       color: var(--text-muted);
       text-align: justify;
+      box-shadow: var(--shadow);
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
 
     .main-section-title {
-      font-size: 10.5px;
+      font-size: 11.5px;
       color: var(--primary);
       font-weight: 800;
       text-transform: uppercase;
       border-bottom: 2px solid var(--border-color);
-      padding-bottom: 2px;
-      margin-bottom: 6px;
+      padding-bottom: 3px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      gap: 6px;
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
       gap: 8px;
     }
 
+    /* Experiência Profissional */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .timeline-item {
-      padding-left: 8px;
+      padding-left: 10px;
       border-left: 2px solid var(--secondary);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     .job-title {
-      font-size: 10.5px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--text-dark);
     }
 
     .company-period {
-      font-size: 9px;
+      font-size: 9.5px;
       color: var(--secondary);
       font-weight: 600;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
 
     .job-details {
-      font-size: 8.8px;
+      font-size: 9px;
       color: var(--text-muted);
-      line-height: 1.32;
+      line-height: 1.4;
     }
 
-    .job-details ul { padding-left: 10px; }
+    .job-details ul {
+      padding-left: 12px;
+    }
 
+    .job-details li {
+      margin-bottom: 2.5px;
+      text-align: justify;
+    }
+
+    /* Stack Tecnológico em Badges */
     .stack-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
     }
 
     .stack-column h4 {
-      font-size: 9px;
+      font-size: 9.5px;
       font-weight: 800;
       color: var(--primary);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .tag-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 3px;
+      gap: 4px;
     }
 
     .tech-badge-blue {
       background-color: #EFF6FF;
       border: 1px solid #BFDBFE;
       color: #1E3A8A;
-      font-size: 7.5px;
+      font-size: 7.8px;
       font-weight: 700;
-      padding: 2px 5px;
-      border-radius: 3px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     .tech-badge-green {
       background-color: #F0FDF4;
       border: 1px solid #BBF7D0;
       color: #166534;
-      font-size: 7.5px;
+      font-size: 7.8px;
       font-weight: 700;
-      padding: 2px 5px;
-      border-radius: 3px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
+    /* Bloco da Instituição Alura na Página 2 */
     .institution-card {
       background-color: #F1F5F9;
-      border: 1px solid #CBD5E1;
-      border-radius: 5px;
-      padding: 6px 10px;
-      margin-bottom: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      box-shadow: var(--shadow);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     .institution-logo {
-      width: 60px;
+      width: 70px;
       height: auto;
     }
 
     .institution-info {
-      font-size: 10px;
+      font-size: 11px;
       color: var(--primary);
-      font-weight: 700;
+      font-weight: 800;
     }
 
-    .cert-category { margin-bottom: 6px; }
+    .cert-category { margin-bottom: 10px; }
 
     .cert-category-title {
-      font-size: 9px;
+      font-size: 9.5px;
       font-weight: 800;
       color: var(--primary);
     }
 
     .cert-category-scope {
-      font-size: 8px;
+      font-size: 8.5px;
       font-style: italic;
       color: var(--text-muted);
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .cert-list {
-      padding-left: 12px;
-      font-size: 8.5px;
+      padding-left: 14px;
+      font-size: 8.8px;
       color: var(--text-dark);
+      line-height: 1.35;
     }
 
+    .cert-list li {
+      margin-bottom: 2px;
+    }
+
+    /* QR Code */
     .qr-container {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       background: var(--bg-light);
-      padding: 5px 8px;
-      border-radius: 5px;
+      padding: 6px 10px;
+      border-radius: 6px;
       border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
     #qrcode img {
-      width: 42px !important;
-      height: 42px !important;
+      width: 44px !important;
+      height: 44px !important;
     }
 
     .qr-text p {
@@ -440,11 +513,12 @@
       font-weight: 600;
     }
 
+    /* Rodapé com Links Clicáveis */
     .footer-links {
       display: flex;
       justify-content: space-around;
       border-top: 1px solid var(--border-color);
-      padding-top: 5px;
+      padding-top: 8px;
       margin-top: auto;
       font-size: 9.5px;
       font-weight: 700;
@@ -453,33 +527,62 @@
     .footer-links a {
       color: var(--primary);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
+    .footer-links a:hover {
+      color: var(--secondary);
+      text-decoration: underline;
+    }
+
+    /* Regras de Impressão de Precisão */
     @media print {
-      @page { size: A4 portrait; margin: 0; }
-      body { background: white; padding: 0; }
-      .download-btn, .photo-label { display: none !important; }
-      .a4-page { box-shadow: none; width: 210mm; }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      body {
+        background: white;
+        padding: 0;
+        margin: 0;
+        gap: 0;
+      }
+      .download-btn, .photo-label {
+        display: none !important;
+      }
+      .a4-page {
+        box-shadow: none;
+        width: 210mm;
+        height: 296.8mm;
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- BOTÃO IMPRIMIR/SALVAR PDF VETORIAL -->
   <button class="download-btn" onclick="window.print()">
     <i class="fa-solid fa-print"></i> Imprimir / Salvar como PDF Clicável
   </button>
 
-  <div class="a4-page" id="cv-content">
+  <!-- ==================== PÁGINA 1 ==================== -->
+  <div class="a4-page" id="page-1">
     
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR PÁGINA 1 -->
     <div class="sidebar">
       
+      <!-- FOTO COM UPLOAD LOCAL -->
       <div class="profile-photo-container">
-        <img id="profile-img" src='foto_kelly.png' alt="Kelly Costa">
+        <img id="profile-img" src="foto_kelly.png" alt="Kelly Costa">
         <label for="photo-upload" class="photo-label">Carregar Foto</label>
         <input type="file" id="photo-upload" class="photo-upload-input" accept="image/*" onchange="previewPhoto(event)">
       </div>
 
+      <!-- SOFT SKILLS CARDS -->
       <div class="sidebar-section">
         <div class="sidebar-title"><i class="fa-solid fa-brain"></i> Soft Skills</div>
         <div class="soft-skills-grid">
@@ -494,6 +597,7 @@
         </div>
       </div>
 
+      <!-- DIFERENCIAIS -->
       <div class="sidebar-section">
         <div class="sidebar-title"><i class="fa-solid fa-circle-check"></i> Diferenciais</div>
         <div class="differentials-list">
@@ -505,6 +609,7 @@
         </div>
       </div>
 
+      <!-- NÍVEL TÉCNICO BARRAS -->
       <div class="sidebar-section">
         <div class="sidebar-title"><i class="fa-solid fa-chart-line"></i> Nível Técnico</div>
         <div class="skills-bars">
@@ -531,6 +636,7 @@
         </div>
       </div>
 
+      <!-- FERRAMENTAS & STACK GRID -->
       <div class="sidebar-section">
         <div class="sidebar-title"><i class="fa-solid fa-microchip"></i> Ferramentas & Stack</div>
         <div class="tools-grid">
@@ -545,6 +651,7 @@
         </div>
       </div>
 
+      <!-- CONTATO CLICÁVEL -->
       <div class="sidebar-section">
         <div class="sidebar-title"><i class="fa-solid fa-address-card"></i> Contato</div>
         <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Barueri, SP, Brasil</div>
@@ -554,6 +661,7 @@
         <div class="contact-item"><i class="fa-solid fa-globe"></i> <a href="https://portfolio-kelly-costa.vercel.app/" target="_blank">Portfólio Vercel</a></div>
       </div>
 
+      <!-- IDIOMAS -->
       <div class="sidebar-section">
         <div class="sidebar-title"><i class="fa-solid fa-language"></i> Idiomas</div>
         <div class="contact-item"><strong>Português:</strong> Nativo</div>
@@ -562,7 +670,7 @@
 
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTENT PÁGINA 1 -->
     <div class="main-content">
       
       <div class="header-main">
@@ -585,7 +693,7 @@
               <ul>
                 <li><strong>Data Domain, Governança & Modelagem Semântica:</strong> Camada semântica corporativa no BigQuery/GCP, regras SQL, Fato/Dimensão, metadados e SLAs de qualidade de dados, consolidando Single Source of Truth e conformidade LGPD.</li>
                 <li><strong>Engenharia Analítica, Cloud & FinOps:</strong> Otimização de pipelines no BigQuery, reduzindo cargas críticas de 15 dias para 1 dia (93% de ganho de performance e otimização de custos nuvem).</li>
-                <li><strong>Python & Engenharia de Dados:</strong> Esteira automatizada em Python no GCP processando mais de 462M de registros contábeis.</li>
+                <li><strong>Python & Engenharia de Dados:</strong> Esteira automatizada em Python no GCP processando mais de 462M de registros contábeis com alta confiabilidade.</li>
                 <li><strong>IA Generativa & Gestão do Conhecimento:</strong> Central do Conhecimento com Gemini e NotebookLM para o catálogo de metadados, capacitando 51 colaboradores.</li>
                 <li><strong>Cultura Técnica & Git Flow:</strong> Versionamento colaborativo com Git/GitHub com times de Engenharia, Backend e Machine Learning.</li>
               </ul>
@@ -666,17 +774,62 @@
         </div>
       </div>
 
+      <!-- RODAPÉ PÁGINA 1 -->
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/kellycristina-costa" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="https://portfolio-kelly-costa.vercel.app/" target="_blank"><i class="fa-solid fa-globe"></i> Portfólio</a>
+        <a href="mailto:kelly.cfcosta.sp@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
+        <a href="tel:11962299776"><i class="fa-solid fa-phone"></i> Telefone</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ==================== PÁGINA 2 ==================== -->
+  <div class="a4-page" id="page-2">
+    
+    <!-- SIDEBAR PÁGINA 2 -->
+    <div class="sidebar">
+      
+      <div class="sidebar-section">
+        <div class="sidebar-title"><i class="fa-solid fa-qrcode"></i> Portfólio Digital</div>
+        <div class="qr-container">
+          <div id="qrcode"></div>
+          <div class="qr-text">
+            <p>Escaneie o QR Code</p>
+            <a href="https://portfolio-kelly-costa.vercel.app/" target="_blank">Acessar Portfólio</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section" style="margin-top: 20px;">
+        <div class="sidebar-title"><i class="fa-solid fa-address-card"></i> Contato Direto</div>
+        <div class="contact-item"><i class="fa-solid fa-phone"></i> (11) 96229-9776</div>
+        <div class="contact-item"><i class="fa-solid fa-envelope"></i> kelly.cfcosta.sp@gmail.com</div>
+      </div>
+
+    </div>
+
+    <!-- MAIN CONTENT PÁGINA 2 -->
+    <div class="main-content">
+      
       <div>
-        <div class="main-section-title"><i class="fa-solid fa-graduation-cap"></i> Formação & Certificações</div>
+        <div class="main-section-title"><i class="fa-solid fa-graduation-cap"></i> Formação Acadêmica</div>
         <div class="job-title">Bacharelado em Administração de Empresas</div>
         <div class="company-period">Faculdade Fernão Dias (2008 – 2011)</div>
+      </div>
 
+      <div>
+        <div class="main-section-title"><i class="fa-solid fa-certificate"></i> Certificações Profissionais (32 Cursos Reconhecidos)</div>
+        
+        <!-- BANNER ALURA -->
         <div class="institution-card">
           <img src="https://www.alura.com.br/assets/img/alura-logo.1729003504.svg" class="institution-logo" alt="Logo Alura">
           <div class="institution-info">Alura - Escola de Tecnologia</div>
         </div>
-        
-        <div style="margin-top: 6px;">
+
+        <div>
           <div class="cert-category">
             <div class="cert-category-title">1. Linguagens, Transformação e Engenharia Analítica</div>
             <div class="cert-category-scope">(Cobre: SQL/Python para manipulação, transformação, modelagem de dados e análise)</div>
@@ -745,14 +898,7 @@
         </div>
       </div>
 
-      <div class="qr-container">
-        <div id="qrcode"></div>
-        <div class="qr-text">
-          <p>Acesse meu Portfólio Digital Completo</p>
-          <a href="https://portfolio-kelly-costa.vercel.app/" target="_blank">https://portfolio-kelly-costa.vercel.app/</a>
-        </div>
-      </div>
-
+      <!-- RODAPÉ PÁGINA 2 -->
       <div class="footer-links">
         <a href="https://linkedin.com/in/kellycristina-costa" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
         <a href="https://portfolio-kelly-costa.vercel.app/" target="_blank"><i class="fa-solid fa-globe"></i> Portfólio</a>
@@ -765,15 +911,17 @@
   </div>
 
   <script>
+    // Gerar QR Code para o Portfólio na Página 2
     new QRCode(document.getElementById("qrcode"), {
       text: "https://portfolio-kelly-costa.vercel.app/",
-      width: 42,
-      height: 42,
+      width: 44,
+      height: 44,
       colorDark : "#1E3A8A",
       colorLight : "#ffffff",
       correctLevel : QRCode.CorrectLevel.H
     });
 
+    // Função de Upload Local de Foto
     function previewPhoto(event) {
       const reader = new FileReader();
       reader.onload = function(){
